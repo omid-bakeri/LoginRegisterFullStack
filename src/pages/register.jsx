@@ -1,5 +1,5 @@
 import { HiUser } from "react-icons/hi2";
-import { FaEye } from "react-icons/fa";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { FaUser } from "react-icons/fa";
 import ErrorRegister from "../components/ErrorRegister";
 import { Link } from "react-router-dom";
@@ -9,6 +9,8 @@ const register = () => {
   const [checkError, setCheckError] = useState(false);
   const [checkErrorMessage, setCheckErrorMessage] = useState("");
 
+  const [checkPasswordEye, setChcekPasswordEye] = useState(false);
+
   const [fullName, setFullName] = useState();
   const [username, setUsername] = useState();
   const [date, setDate] = useState();
@@ -16,6 +18,9 @@ const register = () => {
   const [pass, setPass] = useState();
   const [rePass, setRePass] = useState();
 
+  const handleEyeClick = () => {
+    setChcekPasswordEye((element) => !element);
+  };
   function handleSubmit(e) {
     e.preventDefault();
     console.log(fullName, username, date, email, pass, rePass);
@@ -33,6 +38,9 @@ const register = () => {
       return;
     }
   }
+
+  const input =
+    "w-[335px] bg-slate-500 outline-none rounded-md px-4 text-slate-100 py-2 border-2 border-slate-500 text-xl focus:border-slate-600 placeholder:text-slate-400  hover:duration-700";
   const buttonStyle =
     "bg-green-600 w-full w-[94%] mx-auto px-4 text-green-100 hover:opacity-90 py-3 mt-2 rounded-sm";
   return (
@@ -76,11 +84,7 @@ const register = () => {
                     value={fullName}
                     onChange={(e) => setFullName(e.target.value)}
                     type="text"
-                    className="w-[335px] outline-none
-                     rounded-md px-4 text-slate-800
-                      py-2 border-2
-                      text-xl focus:border-slate-500 
-                      hover:duration-700"
+                    className={input}
                     placeholder="علی رضایی"
                   />
                 </div>
@@ -94,11 +98,7 @@ const register = () => {
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                     type="text"
-                    className="w-[335px] outline-none
-                     rounded-md px-4 text-slate-800
-                      py-2 border-2
-                      text-xl focus:border-slate-500 
-                      hover:duration-700"
+                    className={input}
                     placeholder="َAli12"
                   />
                 </div>
@@ -112,11 +112,7 @@ const register = () => {
                     value={date}
                     onChange={(e) => setDate(e.target.value)}
                     type="date"
-                    className="w-[335px] outline-none
-                     rounded-md px-4 text-slate-800
-                      py-2 border-2
-                      text-xl focus:border-slate-500 
-                      hover:duration-700"
+                    className={input}
                     placeholder="05/12/1390"
                   />
                 </div>
@@ -130,11 +126,7 @@ const register = () => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     type="email"
-                    className="w-[335px] outline-none
-                     rounded-md px-4 text-slate-800
-                      py-2 border-2
-                      text-xl focus:border-slate-500 
-                      hover:duration-700"
+                    className={input}
                     placeholder="example@gmail.com"
                   />
                 </div>
@@ -148,25 +140,32 @@ const register = () => {
                       onFocus={() => setCheckError(false)}
                       value={pass}
                       onChange={(e) => setPass(e.target.value)}
-                      type="password"
-                      className=" outline-none
-                     rounded-md px-4 text-slate-800
-                      py-2 border-2
-                      text-xl focus:border-slate-500 w-[335px] 
-                      hover:duration-700"
+                      type={checkPasswordEye ? "text" : "password"}
+                      className={input}
                       placeholder="Reenfkj43@54d"
                     />
                     <i
                       className="
                    flex justify-start hover:cursor-pointer items-start absolute ml-4"
                     >
-                      <FaEye className="text-slate-400" />
+                      {checkPasswordEye ? (
+                        <FaEyeSlash
+                          onClick={() => handleEyeClick()}
+                          className="text-slate-300"
+                        />
+                      ) : (
+                        <FaEye
+                          onClick={() => handleEyeClick()}
+                          className="text-slate-300"
+                        />
+                      )}
                     </i>
                   </div>
                 </div>
                 <div
                   className="flex p-4   
-                font-regular justify-between items-center gap-3 mb-1"
+                font-regular justify-between 
+                items-center gap-3 mb-1"
                 >
                   <label className="text-lg">تکرار رمز عبور</label>
                   <div className="flex relative  justify-end items-center gap-2 ">
@@ -175,11 +174,7 @@ const register = () => {
                       value={rePass}
                       onChange={(e) => setRePass(e.target.value)}
                       type="password"
-                      className=" outline-none
-                     rounded-md px-4 text-slate-800
-                      py-2 border-2
-                      text-xl focus:border-slate-500 w-[335px] 
-                      hover:duration-700"
+                      className={input}
                       placeholder=""
                     />
                   </div>
